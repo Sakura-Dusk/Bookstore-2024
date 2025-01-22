@@ -22,6 +22,7 @@
 // }
 
 int main() {
+    Init();
     int n; std::cin >> n;
     for (int i = 1; i <= n; i++) {
         std::string op; std::cin >> op;
@@ -37,7 +38,8 @@ int main() {
         }
         if (op == "find") {
             std::string index; std::cin >> index;
-            data_find(index);
+            if (!data_find(index)) cout << "null";
+            cout << endl;
         }
     }
 }
