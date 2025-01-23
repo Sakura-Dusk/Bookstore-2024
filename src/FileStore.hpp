@@ -261,32 +261,32 @@ struct chars {
         }
 };
 
-int main() {
-    int n; std::cin >> n;
-    FileStore <chars, int> T;
-    chars index;
-    for (int i = 1; i <= n; i++) {
-        std::string op; std::cin >> op;
-        // std::cerr << op << std::endl;
-        if (op == "insert") {
-            int value; std::cin >> index.a >> value;
-            T.data_insert(index, value);
-            continue;
-        }
-        if (op == "delete") {
-            int value; std::cin >> index.a >> value;
-            T.data_delete(index, value);
-            continue;
-        }
-        if (op == "find") {
-            std::cin >> index.a;
-            std::vector <int> ans = T.data_find(index);
-            if (!ans.size()) std::cout << "null";
-                else {
-                    for (int i = 0; i < ans.size(); i++) std::cout << ans[i] << " ";
-                }
-            std::cout << std::endl;
-        }
-    }
-    return 0;
-}
+// int main() {
+//     int n; std::cin >> n;
+//     FileStore <chars, int> T;
+//     chars index;
+//     for (int i = 1; i <= n; i++) {
+//         std::string op; std::cin >> op;
+//         // std::cerr << op << std::endl;
+//         if (op == "insert") {
+//             int value; std::cin >> index.a >> value;
+//             T.data_insert(index, value);
+//             continue;
+//         }
+//         if (op == "delete") {
+//             int value; std::cin >> index.a >> value;
+//             T.data_delete(index, value);
+//             continue;
+//         }
+//         if (op == "find") {
+//             std::cin >> index.a;
+//             std::vector <int> ans = T.data_find(index);
+//             if (!ans.size()) std::cout << "null";
+//                 else {
+//                     for (int i = 0; i < ans.size(); i++) std::cout << ans[i] << " ";
+//                 }
+//             std::cout << std::endl;
+//         }
+//     }
+//     return 0;
+// }
