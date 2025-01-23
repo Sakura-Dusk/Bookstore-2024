@@ -30,6 +30,7 @@ public:
             file.close();
             return ;
         }
+        std::cerr << "new initialise\n";
         file.open(file_name, std::ios::out | std::ios::binary);
         int tmp = 0;
         for (int i = 0; i < info_len; ++i)

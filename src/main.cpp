@@ -79,12 +79,12 @@ class FileStore {
     
     public:
         FileStore(string s = "") {
+            if (!std::filesystem::exists(s + "_body")) head = -1;
             body_file.initialise(s + "_body");
             head_file.initialise(s + "_head");
-            head = -1;
         }
 
-        void data_insert(const indextype &index, const valuetype &value) {
+        void data_insert(const indextype index, const valuetype &value) {
             data now_data(index, value);
             // std::cerr << now_data.index.a << " and " << now_data.value << std::endl;
             point now_point;
