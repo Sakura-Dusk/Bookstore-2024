@@ -6,7 +6,7 @@
 #include<cstring>
 #include "MemoryRiver.hpp"
 
-const int BLOCK_SIZE = 400;
+const int BLOCK_SIZE = 300;
 
 template<typename indextype, typename valuetype>
 //需要 indextype 和 valuetype 可比较
@@ -75,13 +75,19 @@ class FileStore {
     private:
         int head;
         MemoryRiver <head_element, 0> body_file;//直接用数组记录链里每个的信息
-        MemoryRiver <point, 0> head_file;//记录这条链的信息（大小，下一条链的下标，这条链对应 body_file 的 id）
+        MemoryRiver <point, 1> head_file;//记录这条链的信息（大小，下一条链的下标，这条链对应 body_file 的 id）
+        //head_file 的常数用来记录 head
     
     public:
         FileStore(string s = "") {
-            if (!std::filesystem::exists(s + "_body")) head = -1;
-            body_file.initialise(s + "_body");
             head_file.initialise(s + "_head");
+            if (!std::filesystem::exists(s + "_body")) head = -1;
+                else head_file.get_info(head, 1);
+            body_file.initialise(s + "_body");
+        }
+
+        ~FileStore() {
+            head_file.write_info(head, 1);
         }
 
         void data_insert(const indextype index, const valuetype &value) {
@@ -170,6 +176,10 @@ class FileStore {
                 }
                 return ;
             }
+            else {
+                now_point.x = Store[0];
+                for (int i = 1; i < now_point.size; i++) now_point.x = std::max(now_point.x, Store[i]);
+            }
 
             body_file.update(Store, now_point.id);
             head_file.update(now_point, nowid);
@@ -254,23 +264,23 @@ struct chars {
 int main() {
     int n; std::cin >> n;
     FileStore <chars, int> T;
-    chars index[100000];
+    chars index;
     for (int i = 1; i <= n; i++) {
         std::string op; std::cin >> op;
         // std::cerr << op << std::endl;
         if (op == "insert") {
-            int value; std::cin >> index[i].a >> value;
-            T.data_insert(index[i], value);
+            int value; std::cin >> index.a >> value;
+            T.data_insert(index, value);
             continue;
         }
         if (op == "delete") {
-            int value; std::cin >> index[i].a >> value;
-            T.data_delete(index[i], value);
+            int value; std::cin >> index.a >> value;
+            T.data_delete(index, value);
             continue;
         }
         if (op == "find") {
-            std::cin >> index[i].a;
-            std::vector <int> ans = T.data_find(index[i]);
+            std::cin >> index.a;
+            std::vector <int> ans = T.data_find(index);
             if (!ans.size()) std::cout << "null";
                 else {
                     for (int i = 0; i < ans.size(); i++) std::cout << ans[i] << " ";
