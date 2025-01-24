@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(
     code
+    src/Chars.hpp
     src/MemoryRiver.hpp
     src/FileStore.hpp
     src/read.hpp

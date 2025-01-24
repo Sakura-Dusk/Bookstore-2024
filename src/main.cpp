@@ -1,9 +1,10 @@
 #include "read.hpp"
+#inlcude "user.hpp"
 
 #include<iostream>
 
 int main() {
-    while (1) {
+    while (!std::cin.eof()) {
         try {
             string s;
             getline(std::cin, s);
@@ -99,6 +100,7 @@ int main() {
             }
         }catch(error) {
             cout << "Invalid\n";
+        }
     }
 
     return 0;
