@@ -3,37 +3,38 @@
 
 #include "Chars.hpp"
 
-struct visitor {
+class User {
     private:
         chars UserID, Password, Username;
         int Privilege;
+        friend class UserStore;
+        friend class UserStack;
 
     public:
-        virtual int level() {return 0;} 
+        User(){Privilege = 0;}
+        User(chars UserID, chars Password, int Privilege, chars Username) : UserID(UserID), Password(Password), Privilege(Privilege), Username(Username) {}
 
-        visitor(chars UserID, chars Password, int Privilege, chars Username) : UserID(UserID), Password(Password), Privilege(Privilege), Username(Username) {}
-
-        bool opearator ==(const visitor &other) const {
+        bool operator ==(const User &other) const {
             return UserID == other.UserID;
         }
 
-        bool operator !=(const visitor &other) const {
+        bool operator !=(const User &other) const {
             return !(*this == other);
         }
 
-        bool operator <(const visitor &other) const {
+        bool operator <(const User &other) const {
             return UserID < other.UserID;
         }
 
-        bool operator <=(const visitor &other) const {
+        bool operator <=(const User &other) const {
             return UserID <= other.UserID;
         }
 
-        bool operator >(const visitor &other) const {
+        bool operator >(const User &other) const {
             return !(*this <= other);
         }
 
-        bool operator >=(const visitor &other) const {
+        bool operator >=(const User &other) const {
             return !(*this < other);
         }
 };

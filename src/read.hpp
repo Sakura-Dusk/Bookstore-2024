@@ -1,9 +1,11 @@
 #ifndef READ_HPP
 #define READ_HPP
 
+#include<string>
+
 class READ {
     private:
-        string a;
+        std::string a;
     
     public:
         void check() {
@@ -13,18 +15,19 @@ class READ {
         }
 
         READ() {}
-        READ(string a) : a(a) {
+        READ(std::string a) :a(a) {
             check();
         }
 
         int length() {
+            check();
             return a.length();
         }
 
-        string get_string() {
+        std::string get_string() {
             check();
-            if (!a.length()) throw error;
-            string re = "";
+            if (!a.length()) throw 0;
+            std::string re = "";
             while (!a.empty() && a[0] != ' ') {
                 re += a[0];
                 a.erase(0, 1);
@@ -33,16 +36,16 @@ class READ {
         }
 };
 
-int string_to_int(string x) {
+int string_to_int(std::string &x) {
     long long res = 0; bool zf = 0;
     int k = x.length();
     for (int i = 0; i < k; i++) {
         if (x[i] < '0' || x[i] > '9') {
             if (x[i] == '-' && !i) {zf = 1; continue;}
-            throw error;
+            throw 0;
         }
         res = res * 10 + x[i] - '0';
-        if (res > 2147483647) throw error;
+        if (res > 2147483647) throw 0;
     }
     return zf ? -res : res;
 }

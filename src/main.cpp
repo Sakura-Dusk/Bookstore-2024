@@ -1,53 +1,59 @@
 #include "read.hpp"
-#inlcude "user.hpp"
+#include "user.hpp"
+#include "UserStack.hpp"
 
+#include<string>
 #include<iostream>
+
+UserStack Stack;
 
 int main() {
     while (!std::cin.eof()) {
         try {
-            string s;
+            std::string s;
             getline(std::cin, s);
             READ a(s);
             if (!a.length()) continue;
 
-            string type = a.get_string();
-            if (type == "exit" || type == "quit") return 0;
-            if (type == "su") {
+            std::string Type = a.get_string();
+            // std::cerr << Type << std::endl;
+            if (Type == "exit" || Type == "quit") return 0;
+            if (Type == "su") {
                 //work about login 登入
-
+                // std::cerr << "Try Login\n";
+                Stack.Login(a);
                 continue;
             }
-            if (type == "logout") {
+            if (Type == "logout") {
                 //work about logout 登出
-
+                Stack.Logout(a);
                 continue;
             }
-            if (type == "register") {
+            if (Type == "register") {
                 //work about register 注册
-
+                Stack.regisiter_account(a);
                 continue;
             }
-            if (type == "passwd") {
+            if (Type == "passwd") {
                 //work about change passwork 修改密码
-
+                Stack.change_Password(a);
                 continue;
             }
-            if (type == "useradd") {
+            if (Type == "useradd") {
                 //work about build account 创建账户
-
+                Stack.create_account(a);
                 continue;
             }
-            if (type == "delete") {
+            if (Type == "delete") {
                 //work about delete 删除账户
-                
+                Stack.delete_account(a);
                 continue;
             }
-            if (type == "show") {
-                if (!a.length()) throw error;
+            if (Type == "show") {
+                if (!a.length()) throw 0;
                 READ b = a;
-                string type_more = b.get_string();
-                if (type_more == "finance") {
+                std::string Type_more = b.get_string();
+                if (Type_more == "finance") {
                     a = b;
                     //work about show finance 财务记录查询
 
@@ -58,48 +64,49 @@ int main() {
                 }
                 continue;
             }
-            if (type == "buy") {
+            if (Type == "buy") {
                 //work about buy book 购买图书
 
                 continue;
             }
-            if (type == "select") {
+            if (Type == "select") {
                 //work about select book 选择图书
 
                 continue;
             }
-            if (type == "modify") {
+            if (Type == "modify") {
                 //work about modify book 修改图书信息
 
                 continue;
             }
-            if (type == "import") {
+            if (Type == "import") {
                 //work about book import 图书进货
                 
                 continue;
             }
             
             //this part need to design
-            if (type == "log") {
+            if (Type == "log") {
                 //work about log generate 生成日志
 
                 continue;
             }
-            if (type == "report") {
-                string report_type = a.get_string();
-                if (report_type == "finance") {
+            if (Type == "report") {
+                std::string report_Type = a.get_string();
+                if (report_Type == "finance") {
                     //work about report finance 生成财务记录报告指令
 
                     continue;
                 }
-                if (report_type == "employee") {
+                if (report_Type == "employee") {
                     //work about report finance 生成全体员工工作情况报告指令
 
                     continue;
                 }
             }
-        }catch(error) {
-            cout << "Invalid\n";
+            throw 0;
+        }catch(int) {
+            std::cout << "Invalid\n";
         }
     }
 

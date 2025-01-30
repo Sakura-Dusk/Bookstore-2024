@@ -81,6 +81,14 @@ class FileStore {
     
     public:
         FileStore(string s = "") {
+            // head_file.initialise(s + "_head");
+            // if (!std::filesystem::exists(s + "_body")) head = -1;
+            //     else head_file.get_info(head, 1);
+            // body_file.initialise(s + "_body");
+        }
+
+        void Init(string s) {
+            // std::cerr << s << std::endl << s + "_head" << std::endl;
             head_file.initialise(s + "_head");
             if (!std::filesystem::exists(s + "_body")) head = -1;
                 else head_file.get_info(head, 1);
@@ -93,7 +101,7 @@ class FileStore {
 
         void data_insert(const indextype index, const valuetype &value) {
             data now_data(index, value);
-            // std::cerr << now_data.index.a << " and " << now_data.value << std::endl;
+            // std::cerr << now_data.index.a << std::endl;
             point now_point;
             head_element Store;
             int nowid = head;
@@ -119,7 +127,7 @@ class FileStore {
                     else Store.a[i] = Store.a[i - 1];
             }
             Store[place] = now_data;
-            // std::cerr << "new put in Store:" << place << " qwq " << Store[place].index.a << " " << Store[place].value << std::endl;
+            // std::cerr << "new put in Store:" << place << " qwq " << Store[place].index.a << std::endl;
             now_point.size++;
             if (now_data > now_point.x) now_point.x = now_data;
             //插入，维护 size,id(这个不会变),x(x代表里面最大的那个)
@@ -189,11 +197,14 @@ class FileStore {
         std::vector <valuetype> data_find(const indextype &index) {
             std::vector <valuetype> res;
             if (head == -1) return res;
-            data now_data(index, -1);
+            valuetype tmp;
+            data now_data(index, tmp);
             point now_point;
+            // std::cerr << head << std::endl;
             int nowid = head;
             while (nowid != -1) {
                 head_file.read(now_point, nowid);
+                // std::cerr << "nowid: " << nowid << ", size:" << now_point.size << std::endl;
                 if (!now_point.size || now_point.next == -1 || now_point.x >= now_data) break;
                 nowid = now_point.next;
             }//找到 data 到底在哪个链开始
@@ -221,6 +232,11 @@ class FileStore {
                 now = Store[place];
             }
             return res;
+        }
+
+        bool data_find_bool(const indextype &index) {
+            std::vector <valuetype> res = data_find(index);
+            return res.size() > 0;
         }
 };
 

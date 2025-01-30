@@ -23,11 +23,12 @@ public:
     MemoryRiver(const string& file_name) : file_name(file_name) {}
 
     ~MemoryRiver() {
-        std::cerr << "close initialise\n";
+        // std::cerr << "close initialise\n";
         file.close();
     }
 
     void initialise(string FN = "") {
+        // std::cerr << FN << std::endl;
         if (FN != "") file_name = FN;
         if (std::filesystem::exists(file_name)) {
             file.open(file_name, std::ios::in | std::ios::out | std::ios::binary);
@@ -36,7 +37,7 @@ public:
             file.open(file_name, std::ios::in | std::ios::out | std::ios::binary);
             return ;
         }
-        std::cerr << "new initialise\n";
+        // std::cerr << "new initialise\n";
         file.open(file_name, std::ios::out | std::ios::binary);
         int tmp = 0;
         for (int i = 0; i < info_len; ++i)

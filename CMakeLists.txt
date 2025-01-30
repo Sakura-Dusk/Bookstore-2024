@@ -9,5 +9,8 @@ add_executable(
     src/MemoryRiver.hpp
     src/FileStore.hpp
     src/read.hpp
+    src/user.hpp
+    src/UserStore.hpp
+    src/UserStack.hpp
     src/main.cpp
 )
