@@ -8,7 +8,7 @@ struct chars {
     public:
         char a[61];
 
-        chars(){}
+        chars(){a[0] = 0;}
 
         chars(std::string &x) {
             int len = x.length();

@@ -8,9 +8,14 @@ add_executable(
     src/Chars.hpp
     src/MemoryRiver.hpp
     src/FileStore.hpp
+
     src/read.hpp
+    
     src/user.hpp
     src/UserStore.hpp
     src/UserStack.hpp
+    
+    src/Book.hpp
+    
     src/main.cpp
 )
