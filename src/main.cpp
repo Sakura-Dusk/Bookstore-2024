@@ -1,11 +1,13 @@
 #include "read.hpp"
 #include "user.hpp"
 #include "UserStack.hpp"
+#include "BookManager.hpp"
 
 #include<string>
 #include<iostream>
 
 UserStack Stack;
+BookManager Bookmanager;
 
 int main() {
     while (!std::cin.eof()) {
@@ -60,28 +62,28 @@ int main() {
                 }
                 else {
                     //work about show 检索图书
-
+                    BookManager.show_book(a);
                 }
                 continue;
             }
             if (Type == "buy") {
                 //work about buy book 购买图书
-
+                BookManager.book_buy(a);
                 continue;
             }
             if (Type == "select") {
                 //work about select book 选择图书
-
+                BookManager.book_select(a);
                 continue;
             }
             if (Type == "modify") {
                 //work about modify book 修改图书信息
-
+                BookManager.book_modify(a);
                 continue;
             }
             if (Type == "import") {
                 //work about book import 图书进货
-                
+                BookManager.book_import(a);
                 continue;
             }
             

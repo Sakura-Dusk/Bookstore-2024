@@ -16,6 +16,7 @@ add_executable(
     src/UserStack.hpp
     
     src/Book.hpp
+    src/BookManager.hpp
     
     src/main.cpp
 )

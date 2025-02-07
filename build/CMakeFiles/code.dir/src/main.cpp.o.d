@@ -196,4 +196,11 @@ CMakeFiles/code.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/refwrap.h \
  /usr/include/c++/11/ext/aligned_buffer.h \
  /usr/include/c++/11/bits/fs_dir.h /usr/include/c++/11/bits/fs_ops.h \
- /home/sakura/Bookstore-2024/src/UserStore.hpp
+ /home/sakura/Bookstore-2024/src/UserStore.hpp \
+ /home/sakura/Bookstore-2024/src/BookManager.hpp \
+ /home/sakura/Bookstore-2024/src/Book.hpp /usr/include/c++/11/map \
+ /usr/include/c++/11/bits/stl_tree.h \
+ /usr/include/c++/11/bits/node_handle.h \
+ /usr/include/c++/11/bits/stl_map.h \
+ /usr/include/c++/11/bits/stl_multimap.h \
+ /usr/include/c++/11/bits/erase_if.h

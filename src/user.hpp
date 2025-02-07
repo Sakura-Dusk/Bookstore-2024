@@ -6,9 +6,10 @@
 class User {
     private:
         chars UserID, Password, Username;
-        int Privilege;
+        int Privilege, select_book = -1;
         friend class UserStore;
         friend class UserStack;
+        friend class BookManager;
 
     public:
         User(){Privilege = 0;}
