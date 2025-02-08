@@ -141,8 +141,6 @@ CMakeFiles/code.dir/src/main.cpp.o: \
  /home/sakura/Bookstore-2024/src/user.hpp \
  /home/sakura/Bookstore-2024/src/Chars.hpp /usr/include/c++/11/cstring \
  /usr/include/string.h /usr/include/strings.h \
- /home/sakura/Bookstore-2024/src/UserStack.hpp \
- /home/sakura/Bookstore-2024/src/FileStore.hpp \
  /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
  /usr/include/c++/11/ios /usr/include/c++/11/exception \
  /usr/include/c++/11/bits/exception_ptr.h \
@@ -164,7 +162,9 @@ CMakeFiles/code.dir/src/main.cpp.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/istream.tcc \
+ /home/sakura/Bookstore-2024/src/UserStack.hpp \
+ /home/sakura/Bookstore-2024/src/FileStore.hpp /usr/include/c++/11/vector \
  /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \

@@ -6,9 +6,6 @@
 #include<string>
 #include<iostream>
 
-UserStack Stack;
-BookManager Bookmanager;
-
 int main() {
     while (!std::cin.eof()) {
         try {
@@ -62,28 +59,28 @@ int main() {
                 }
                 else {
                     //work about show 检索图书
-                    BookManager.show_book(a);
+                    Bookmanager.show_book(a);
                 }
                 continue;
             }
             if (Type == "buy") {
                 //work about buy book 购买图书
-                BookManager.book_buy(a);
+                Bookmanager.book_buy(a);
                 continue;
             }
             if (Type == "select") {
                 //work about select book 选择图书
-                BookManager.book_select(a);
+                Bookmanager.book_select(a);
                 continue;
             }
             if (Type == "modify") {
                 //work about modify book 修改图书信息
-                BookManager.book_modify(a);
+                Bookmanager.book_modify(a);
                 continue;
             }
             if (Type == "import") {
                 //work about book import 图书进货
-                BookManager.book_import(a);
+                Bookmanager.book_import(a);
                 continue;
             }
             

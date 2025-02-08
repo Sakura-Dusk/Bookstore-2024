@@ -170,8 +170,6 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/cstring \
   /usr/include/string.h \
   /usr/include/strings.h \
-  ../src/UserStack.hpp \
-  ../src/FileStore.hpp \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
   /usr/include/c++/11/ios \
@@ -201,6 +199,8 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/bits/ostream.tcc \
   /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
+  ../src/UserStack.hpp \
+  ../src/FileStore.hpp \
   /usr/include/c++/11/vector \
   /usr/include/c++/11/bits/stl_uninitialized.h \
   /usr/include/c++/11/bits/stl_vector.h \
@@ -247,8 +247,22 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/ext/aligned_buffer.h \
   /usr/include/c++/11/bits/fs_dir.h \
   /usr/include/c++/11/bits/fs_ops.h \
-  ../src/UserStore.hpp
+  ../src/UserStore.hpp \
+  ../src/BookManager.hpp \
+  ../src/Book.hpp \
+  /usr/include/c++/11/map \
+  /usr/include/c++/11/bits/stl_tree.h \
+  /usr/include/c++/11/bits/node_handle.h \
+  /usr/include/c++/11/bits/stl_map.h \
+  /usr/include/c++/11/bits/stl_multimap.h \
+  /usr/include/c++/11/bits/erase_if.h
 
+
+/usr/include/c++/11/bits/erase_if.h:
+
+/usr/include/c++/11/bits/stl_map.h:
+
+../src/BookManager.hpp:
 
 /usr/include/c++/11/bits/fs_ops.h:
 
@@ -316,6 +330,10 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/c++/11/bits/basic_ios.h:
 
+../src/UserStack.hpp:
+
+/usr/include/c++/11/bits/streambuf.tcc:
+
 /usr/include/c++/11/stdexcept:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/error_constants.h:
@@ -341,10 +359,6 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/11/bits/unique_ptr.h:
 
 /usr/include/c++/11/ostream:
-
-/usr/include/c++/11/bits/streambuf.tcc:
-
-../src/UserStack.hpp:
 
 /usr/include/string.h:
 
@@ -444,6 +458,8 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
+/usr/include/c++/11/map:
+
 /usr/include/c++/11/bits/ranges_base.h:
 
 /usr/include/c++/11/bits/range_access.h:
@@ -472,6 +488,8 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/c++/11/bits/iterator_concepts.h:
 
+/usr/include/c++/11/bits/stl_multimap.h:
+
 /usr/include/features.h:
 
 /usr/include/c++/11/ext/numeric_traits.h:
@@ -479,6 +497,8 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/11/ios:
 
 /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h:
+
+../src/Book.hpp:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h:
 
@@ -525,6 +545,8 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/x86_64-linux-gnu/asm/errno.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_timeval.h:
+
+/usr/include/c++/11/bits/node_handle.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__mbstate_t.h:
 
@@ -579,6 +601,8 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/11/bits/fs_path.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/gthr.h:
+
+/usr/include/c++/11/bits/stl_tree.h:
 
 /usr/include/c++/11/tuple:
 

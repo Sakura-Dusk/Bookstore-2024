@@ -138,6 +138,6 @@ class UserStack {
             }
             Store.User_delete(UserID);
         }
-};
+}Stack;
 
 #endif

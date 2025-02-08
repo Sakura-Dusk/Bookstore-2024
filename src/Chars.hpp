@@ -3,6 +3,7 @@
 
 #include<string>
 #include<cstring>
+#include<iostream>
 
 struct chars {
     public:
@@ -53,6 +54,18 @@ chars Chars(std::string x) {
     for (int i = 0; i < len; i++) res[i] = x[i];
     for (int i = len; i < 61; i++) res[i] = 0;
     return res;
+}
+
+std::string String(chars x) {
+    int len = strlen(x.a);
+    std::string res; res.resize(len);
+    for (int i = 0; i < len; i++) res[i] = x.a[i];
+    return res;
+}
+
+std::ostream& operator<<(std::ostream& out, const chars& now) {
+    out << now.a;
+    return out;
 }
 
 #endif

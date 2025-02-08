@@ -2,6 +2,7 @@
 #define BOOK_HPP
 
 #include "Chars.hpp"
+#include <iostream>
 
 class Book {
     private:
@@ -9,13 +10,16 @@ class Book {
         chars ISBN, BookName, Author, Keyword;
         int Quantity;
         double Price, TotalCost;
+        friend std::ostream &operator <<(std::ostream &, const Book &);
+        friend class BookManager;
+        friend bool show_cmp(Book, Book);
 
     public:
         Book() {
             Quantity = 0; BookID = 0;
             Price = TotalCost = 0;
         }
-        BookID(int id) : BookID(id) {
+        Book(int id) : BookID(id) {
             Quantity = 0;
             Price = TotalCost = 0;
         }
@@ -53,12 +57,12 @@ class Book {
         bool operator >=(const Book &other) const {
             return !(*this < other);
         }
-
-        std::ostream &operator <<(std::ostream &out, const Book &now) {
-            std::cout;
-            std::cout << now.ISBN << '\t' << now.BookName << '\t' << now.Author << '\t' << now.Keyword << '\t' << fixed << setprecision(2) << now.Price << '\t' << fixed << setprecision(0) << now.Quantity;
-        }
 };
+
+std::ostream &operator <<(std::ostream &out, const Book &now) {
+    out << now.ISBN << '\t' << now.BookName << '\t' << now.Author << '\t' << now.Keyword << '\t' << std::fixed << std::setprecision(2) << now.Price << '\t' << std::fixed << std::setprecision(0) << now.Quantity;
+    return out;
+}
 
 // //为了检索图书，需要把按所有检索信息排序的结果都存一次
 
