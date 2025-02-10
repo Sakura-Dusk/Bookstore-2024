@@ -49,7 +49,11 @@ int main() {
                 continue;
             }
             if (Type == "show") {
-                if (!a.length()) throw 0;
+                if (!a.length()) {
+                    //work about show 检索图书
+                    Bookmanager.show_book(a);
+                    continue;
+                }
                 READ b = a;
                 std::string Type_more = b.get_string();
                 if (Type_more == "finance") {

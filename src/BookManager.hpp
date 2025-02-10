@@ -71,7 +71,8 @@ class BookManager {
         }
 
         bool find_Keyword(string &Keyword, std::vector <Book> &res) {
-            std::vector <int> re = Author_Store.data_find(Chars(Keyword));
+            std::vector <int> re = Keyword_Store.data_find(Chars(Keyword));
+            // std::cerr << Keyword << " found number: " << re.size() << "\n";
             if (!re.size()) return 0;
             res.clear(); res.resize(re.size());
             for (int i = 0; i < re.size(); i++) find_id(re[i], res[i]);
@@ -99,6 +100,10 @@ class BookManager {
             return 1;
         }
         bool check_Name(string &name) {
+            if (name.length() < 3) throw 0;
+            if (name[0] != '"' || name[name.length() - 1] != '"') throw 0;
+            name.erase(0, 1); name.erase(name.length() - 1, 1);
+
             int len = name.length();
             if (len > 60 || !len) return 0;
             for (int i = 0; i < len; i++)
@@ -106,6 +111,10 @@ class BookManager {
             return 1;
         }
         bool check_Keyword(string &name) {
+            if (name.length() < 3) throw 0;
+            if (name[0] != '"' || name[name.length() - 1] != '"') throw 0;
+            name.erase(0, 1); name.erase(name.length() - 1, 1);
+
             int len = name.length();
             if (len > 60 || !len) return 0;
             if (name[0] == '|') return 0;
@@ -128,6 +137,10 @@ class BookManager {
             return 1;
         }
         bool check_Keyword_one(string &name) {
+            if (name.length() < 3) throw 0;
+            if (name[0] != '"' || name[name.length() - 1] != '"') throw 0;
+            name.erase(0, 1); name.erase(name.length() - 1, 1);
+            
             int len = name.length();
             if (len > 60 || !len) return 0;
             for (int i = 0; i < len; i++)
@@ -137,10 +150,12 @@ class BookManager {
 
         void show_book(READ &a) {
             if (Stack.get_User().Privilege < 1) throw 0;
+            // std::cerr << a.length() << '\n';
             if (!a.length()) {//按 ISBN 输出所有图书
+                // std::cerr << "show all\n";
                 std::vector <Book> res;
                 res.resize(tot);
-                for (int i = 0; i < tot; i++) find_id(i, res[i]);
+                for (int i = 0; i < tot; i++) find_id(i + 1, res[i]);
                 sort(res.begin(), res.end(), show_cmp);
                 for (int i = 0; i < tot; i++) std::cout << res[i] << '\n';
                 if (!tot) std::cout << '\n';
@@ -178,6 +193,7 @@ class BookManager {
             }
             if (op == "-keyword") {
                 if (!check_Keyword_one(word)) throw 0;
+                // std::cerr << word << '\n';
                 std::vector <Book> res;
                 if (!find_Keyword(word, res)) std::cout << '\n';
                     else {
@@ -192,17 +208,21 @@ class BookManager {
             if (Stack.get_User().Privilege < 3) throw 0;
             if (!a.length()) throw 0;
             std::string ISBN = a.get_string();
+            // std::cerr << ISBN << '\n';
             if (!check_ISBN(ISBN)) throw 0;
             if (a.length()) throw 0;
             User now = Stack.get_User();
             int last_id = now.select_book;
-            if (last_id && Chars(ISBN) == (*Book_Store.data_find(last_id).begin()).ISBN) throw 0;
+            // std::cerr << now.UserID << std::endl;
+            // if (last_id != -1 && Chars(ISBN) == (*Book_Store.data_find(last_id).begin()).ISBN) throw 0;
 
             Stack.Store.List.data_delete(now.UserID, now);
             
             int nowid;
             std::vector <int> tmp = ISBN_Store.data_find(ISBN);
+            // std::cerr << tmp.size() << std::endl;
             if (tmp.empty()) {
+                // std::cerr << "create a new book\n";
                 nowid = ++tot;
                 Book nowbook(tot);//需要创建这本书，并给他 ISBN 的信息
                 nowbook.ISBN = Chars(ISBN);
@@ -214,6 +234,7 @@ class BookManager {
                 now.select_book = tmp[0];
             }
             
+            // std::cerr << now.UserID << " " << now.select_book << "\n";
             Stack.Store.List.data_insert(now.UserID, now);
         }
 
@@ -270,6 +291,7 @@ class BookManager {
                 std::string word = a.get_string();
                 std::string op;
                 cut_string(word, op);
+                // std::cerr << "op=" << op << "\nword=" << word << '\n';
                 if (!word.length()) throw 0;
                 if (op == "-ISBN") {
                     if (fir[0]) throw 0; fir[0] = 1;
@@ -305,7 +327,9 @@ class BookManager {
         
         void book_modify(READ &a) {
             if (Stack.get_User().Privilege < 3) throw 0;
+            // std::cerr << "User privilege fine\n";
             User now = Stack.get_User();
+            // std::cerr << now.select_book << std::endl;
             if (now.select_book == -1) throw 0;
             Book now_book; find_id(now.select_book, now_book);
 
@@ -316,8 +340,10 @@ class BookManager {
                 std::string word = a.get_string();
                 std::string op;
                 cut_string(word, op);
+                // std::cerr << "op=" << op << "\nword=" << word << '\n';
                 if (op == "-ISBN") {
                     chars last_ISBN = now_book.ISBN;
+                    // std::cerr << "last_ISBN = " << last_ISBN << "\n";
                     if (last_ISBN == Chars(word)) throw 0;
                     if (last_ISBN[0]) ISBN_Store.data_delete(last_ISBN, now_book.BookID);
                     Book_Store.data_delete(now_book.BookID, now_book);
@@ -327,6 +353,7 @@ class BookManager {
                     continue;
                 }
                 if (op == "-name") {
+                    word.erase(0, 1); word.erase(word.length() - 1, 1);
                     chars last_name = now_book.BookName;
                     if (last_name[0]) BookName_Store.data_delete(last_name, now_book.BookID);
                     Book_Store.data_delete(now_book.BookID, now_book);
@@ -336,6 +363,7 @@ class BookManager {
                     continue;
                 }
                 if (op == "-author") {
+                    word.erase(0, 1); word.erase(word.length() - 1, 1);
                     chars last_author = now_book.Author;
                     if (last_author[0]) Author_Store.data_delete(last_author, now_book.BookID);
                     Book_Store.data_delete(now_book.BookID, now_book);
@@ -345,6 +373,7 @@ class BookManager {
                     continue;
                 }
                 if (op == "-keyword") {
+                    word.erase(0, 1); word.erase(word.length() - 1, 1);
                     std::string last_keyword = String(now_book.Keyword);
                     int lstid = 0, len = last_keyword.length();
                     for (int i = 0; i < len; i++) {
@@ -366,10 +395,12 @@ class BookManager {
                         if (word[i] == '|') {
                             std::string cut = word.substr(lstid, i - lstid);
                             Keyword_Store.data_insert(Chars(cut), now_book.BookID);
+                            // std::cerr << "cut word = " << cut << std::endl;
                             lstid = i + 1;
                         }
                     }
                     std::string cut = word.substr(lstid);
+                    // std::cerr << "cut word = " << cut << std::endl;
                     Keyword_Store.data_insert(Chars(cut), now_book.BookID);
                     continue;
                 }

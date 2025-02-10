@@ -10,8 +10,9 @@
 
 class UserStack {
     private:
-        std::vector <User> Stack;
+        std::vector <chars> Stack;
         UserStore Store;
+        friend class UserStore;
         friend class BookManager;
 
     public:
@@ -20,7 +21,7 @@ class UserStack {
                 // std::cerr << "no user" << std::endl;
                 return User();
             }
-            return Stack.back();
+            return *Store.List.data_find(Stack.back()).begin();
         }
 
         bool check_ID(string &now) {
@@ -52,13 +53,13 @@ class UserStack {
                 if (!Store.User_get(nxt, new_User)) throw 0;
                 // std::cerr << new_User.Password.a << std::endl << Password << std::endl;
                 if (new_User.Password != chars(Password)) throw 0;
-                Stack.push_back(new_User);
+                Stack.push_back(new_User.UserID);
             }
             else {
                 User new_User;
                 if (!Store.User_get(nxt, new_User)) throw 0;
                 if (new_User.Privilege >= get_User().Privilege) throw 0;
-                Stack.push_back(new_User);
+                Stack.push_back(new_User.UserID);
             }
         }
 
@@ -66,7 +67,7 @@ class UserStack {
             if (a.length()) throw 0;
             if (Stack.empty()) throw 0;
             //取消当前选中的书
-            User now = Stack.back();
+            User now = *Store.List.data_find(Stack.back()).begin();
             Store.List.data_delete(now.UserID, now);
             now.select_book = -1;
             Store.List.data_insert(now.UserID, now);
@@ -134,7 +135,7 @@ class UserStack {
             User new_User;
             if (!Store.User_get(UserID, new_User)) throw 0;
             for (int i = 0; i < Stack.size(); i++) {
-                if (Stack[i].UserID == UserID) throw 0;
+                if (Stack[i] == UserID) throw 0;
             }
             Store.User_delete(UserID);
         }
