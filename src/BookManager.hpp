@@ -1,6 +1,7 @@
 #ifndef BOOKMANAGER_HPP
 #define BOOKMANAGER_HPP
 
+#include "Finance.hpp"
 #include "Chars.hpp"
 #include "Book.hpp"
 
@@ -20,17 +21,30 @@ class BookManager {
         // FileStore <Book_Sort_by_BookName, Book_Sort_by_BookName> BookName_Store;
         // FileStore <Book_Sort_by_Author, Book_Sort_by_Author> Author_Store;
         // FileStore <Book_Sort_by_Keyword, Book_Sort_by_Keyword> Keyword_Store;
-        int tot = 0;
+        MemoryRiver <int, 1> tot_;
+        int tot;
         FileStore <int, Book> Book_Store;
         FileStore <chars, int> ISBN_Store, BookName_Store, Author_Store, Keyword_Store;
 
     public:
         BookManager() {
+            tot_.initialise("Book_Manager_tot");
+            if (std::filesystem::exists("Book_Manager_tot")) tot_.get_info(tot, 1);
+                else {
+                    // std::cerr << "New File\n";
+                    tot = 0;
+                }
+            // std::cerr << "Booknumber = " << tot << std::endl;
             Book_Store.Init("Book_Store");
             ISBN_Store.Init("ISBN_Store");
             BookName_Store.Init("BookName_Store");
             Author_Store.Init("Author_Store");
             Keyword_Store.Init("Keyword_Store");
+        }
+        
+        ~BookManager() {
+            // std::cerr << "update BookNumber = " << tot << std::endl;
+            tot_.write_info(tot, 1);
         }
 
         int add_book() {//return id
@@ -251,13 +265,16 @@ class BookManager {
             Book now;
             if (!find_ISBN(ISBN, now)) throw 0;
             
-            if (quantity < 0) throw 0;
+            if (quantity <= 0) throw 0;
             if (now.Quantity < quantity) throw 0;
             Book_Store.data_delete(now.BookID, now);
             now.Quantity -= quantity;
             now.TotalCost -= now.Price * quantity;
             std::cout << std::fixed << std::setprecision(2) << now.Price * quantity << '\t' << std::fixed << std::setprecision(0) << '\n';
             Book_Store.data_insert(now.BookID, now);
+
+            Finance nw(finance_file.tot + 1, now.Price * quantity, 0);
+            finance_file.update_finance(nw);
         }
 
         void book_import(READ &a) {
@@ -280,6 +297,12 @@ class BookManager {
             now_book.Quantity += quantity;
             now_book.TotalCost += total_cost;
             Book_Store.data_insert(now_book.BookID, now_book);
+
+            // std::cerr << "total_cost = " << total_cost << '\n';
+
+            Finance nw(finance_file.tot + 1, 0, total_cost);
+            // std::cerr << "Try to update finance\n";
+            finance_file.update_finance(nw);
         }
 
         void book_modify_check(READ &a) {
@@ -297,7 +320,8 @@ class BookManager {
                     if (fir[0]) throw 0; fir[0] = 1;
                     chars last_ISBN = now_book.ISBN;
                     if (!check_ISBN(word)) throw 0;
-                    if (last_ISBN == Chars(word)) throw 0;
+                    Book tmp;
+                    if (find_ISBN(word, tmp)) throw 0;
                     continue;
                 }
                 if (op == "-name") {
@@ -318,7 +342,7 @@ class BookManager {
                 if (op == "-price") {
                     if (fir[4]) throw 0; fir[4] = 1;
                     double price = string_to_double(word);
-                    if (price <= 0) throw 0;
+                    if (price < 0) throw 0;
                     continue;
                 }
                 throw 0;

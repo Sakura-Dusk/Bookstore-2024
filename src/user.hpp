@@ -10,6 +10,7 @@ class User {
         friend class UserStore;
         friend class UserStack;
         friend class BookManager;
+        friend class Finance_system;
 
     public:
         User(){Privilege = 0;}

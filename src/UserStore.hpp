@@ -11,6 +11,7 @@
 struct UserStore {
     private:
         FileStore <chars, User> List;
+        friend class Finance_system;
         friend class BookManager;
         friend class UserStack;
 

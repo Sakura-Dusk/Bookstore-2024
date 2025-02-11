@@ -1,4 +1,5 @@
 #include "read.hpp"
+#include "Finance.hpp"
 #include "user.hpp"
 #include "UserStack.hpp"
 #include "BookManager.hpp"
@@ -7,7 +8,9 @@
 #include<iostream>
 
 int main() {
+    int cnt = 0;
     while (!std::cin.eof()) {
+        cnt++;
         try {
             std::string s;
             getline(std::cin, s);
@@ -59,7 +62,7 @@ int main() {
                 if (Type_more == "finance") {
                     a = b;
                     //work about show finance 财务记录查询
-
+                    finance_file.show_finance(a);
                 }
                 else {
                     //work about show 检索图书
@@ -109,6 +112,7 @@ int main() {
             }
             throw 0;
         }catch(int) {
+            std::cerr << "on text :" << cnt << std::endl;
             std::cout << "Invalid\n";
         }
     }

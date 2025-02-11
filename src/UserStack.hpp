@@ -14,6 +14,7 @@ class UserStack {
         UserStore Store;
         friend class UserStore;
         friend class BookManager;
+        friend class Finance_system;
 
     public:
         User get_User() {

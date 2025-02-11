@@ -165,13 +165,10 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/c++/11/bits/charconv.h \
   /usr/include/c++/11/bits/basic_string.tcc \
-  ../src/user.hpp \
-  ../src/Chars.hpp \
-  /usr/include/c++/11/cstring \
-  /usr/include/string.h \
-  /usr/include/strings.h \
-  /usr/include/c++/11/iostream \
-  /usr/include/c++/11/ostream \
+  ../src/Finance.hpp \
+  ../src/MemoryRiver.hpp \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/istream \
   /usr/include/c++/11/ios \
   /usr/include/c++/11/exception \
   /usr/include/c++/11/bits/exception_ptr.h \
@@ -196,22 +193,14 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h \
   /usr/include/c++/11/bits/locale_facets.tcc \
   /usr/include/c++/11/bits/basic_ios.tcc \
+  /usr/include/c++/11/ostream \
   /usr/include/c++/11/bits/ostream.tcc \
-  /usr/include/c++/11/istream \
   /usr/include/c++/11/bits/istream.tcc \
-  ../src/UserStack.hpp \
-  ../src/FileStore.hpp \
-  /usr/include/c++/11/vector \
-  /usr/include/c++/11/bits/stl_uninitialized.h \
-  /usr/include/c++/11/bits/stl_vector.h \
-  /usr/include/c++/11/bits/stl_bvector.h \
-  /usr/include/c++/11/bits/vector.tcc \
-  ../src/MemoryRiver.hpp \
-  /usr/include/c++/11/fstream \
   /usr/include/c++/11/bits/codecvt.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
   /usr/include/c++/11/bits/fstream.tcc \
+  /usr/include/c++/11/iostream \
   /usr/include/c++/11/filesystem \
   /usr/include/c++/11/bits/fs_fwd.h \
   /usr/include/c++/11/chrono \
@@ -247,6 +236,18 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/ext/aligned_buffer.h \
   /usr/include/c++/11/bits/fs_dir.h \
   /usr/include/c++/11/bits/fs_ops.h \
+  ../src/FileStore.hpp \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
+  /usr/include/c++/11/cstring \
+  /usr/include/string.h \
+  /usr/include/strings.h \
+  ../src/Chars.hpp \
+  ../src/UserStack.hpp \
+  ../src/user.hpp \
   ../src/UserStore.hpp \
   ../src/BookManager.hpp \
   ../src/Book.hpp \
@@ -263,6 +264,20 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 /usr/include/c++/11/bits/stl_map.h:
 
 ../src/BookManager.hpp:
+
+../src/user.hpp:
+
+../src/Chars.hpp:
+
+/usr/include/string.h:
+
+/usr/include/c++/11/bits/vector.tcc:
+
+/usr/include/c++/11/bits/stl_bvector.h:
+
+/usr/include/c++/11/bits/stl_uninitialized.h:
+
+/usr/include/c++/11/vector:
 
 /usr/include/c++/11/bits/fs_ops.h:
 
@@ -290,6 +305,10 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/c++/11/limits:
 
+/usr/include/c++/11/cstring:
+
+/usr/include/c++/11/ratio:
+
 /usr/include/c++/11/bits/fs_fwd.h:
 
 /usr/include/c++/11/filesystem:
@@ -300,19 +319,11 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
 
-../src/MemoryRiver.hpp:
-
-/usr/include/c++/11/bits/vector.tcc:
-
-/usr/include/c++/11/bits/stl_bvector.h:
-
-/usr/include/c++/11/bits/stl_uninitialized.h:
-
-/usr/include/c++/11/vector:
-
 /usr/include/c++/11/bits/istream.tcc:
 
-/usr/include/c++/11/istream:
+/usr/include/c++/11/bits/unique_ptr.h:
+
+/usr/include/c++/11/ostream:
 
 /usr/include/c++/11/bits/basic_ios.tcc:
 
@@ -356,19 +367,9 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/c++/11/exception:
 
-/usr/include/c++/11/bits/unique_ptr.h:
+/usr/include/c++/11/istream:
 
-/usr/include/c++/11/ostream:
-
-/usr/include/string.h:
-
-/usr/include/c++/11/ratio:
-
-/usr/include/c++/11/cstring:
-
-../src/Chars.hpp:
-
-../src/user.hpp:
+../src/MemoryRiver.hpp:
 
 /usr/include/c++/11/bits/basic_string.tcc:
 
@@ -650,6 +651,8 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
 
+../src/Finance.hpp:
+
 /usr/include/c++/11/iosfwd:
 
 /usr/include/c++/11/streambuf:
@@ -734,9 +737,9 @@ CMakeFiles/code.dir/src/main.cpp.o: ../src/main.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
-/usr/include/c++/11/bits/sstream.tcc:
-
 /usr/include/strings.h:
+
+/usr/include/c++/11/bits/sstream.tcc:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h:
 
