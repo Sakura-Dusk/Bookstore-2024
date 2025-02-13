@@ -65,14 +65,20 @@ class Finance_system {
 
     public:
         Finance_system() {
+            Finance_Store.Init("Finance_File");
             if (std::filesystem::exists("Finance_File_tot")) {
+                TOT.initialise("Finance_File_tot");
                 TOT.get_info(tot, 1);
+                // std::cerr << tot << "\n";
+                // Finance res;
+                // if (tot) res = *Finance_Store.data_find(tot).begin();
+                // std::cerr << res << '\n';
             }
             else TOT.initialise("Finance_File_tot"), tot = 0;
-            Finance_Store.Init("Finance_File");
         }
 
         ~Finance_system() {
+            // std::cerr << tot << std::endl;
             TOT.write_info(tot, 1);
         }
 
