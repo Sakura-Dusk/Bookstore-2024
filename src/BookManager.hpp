@@ -5,6 +5,7 @@
 #include "Chars.hpp"
 #include "Book.hpp"
 
+#include<algorithm>
 #include<cstring>
 #include<string>
 #include<vector>
@@ -71,7 +72,7 @@ class BookManager {
             if (!re.size()) return 0;
             res.clear(); res.resize(re.size());
             for (int i = 0; i < re.size(); i++) find_id(re[i], res[i]);
-            sort(res.begin(), res.end(), show_cmp);
+            std::sort(res.begin(), res.end(), show_cmp);
             return 1;
         }
 
@@ -80,7 +81,7 @@ class BookManager {
             if (!re.size()) return 0;
             res.clear(); res.resize(re.size());
             for (int i = 0; i < re.size(); i++) find_id(re[i], res[i]);
-            sort(res.begin(), res.end(), show_cmp);
+            std::sort(res.begin(), res.end(), show_cmp);
             return 1;
         }
 
@@ -90,7 +91,7 @@ class BookManager {
             if (!re.size()) return 0;
             res.clear(); res.resize(re.size());
             for (int i = 0; i < re.size(); i++) find_id(re[i], res[i]);
-            sort(res.begin(), res.end(), show_cmp);
+            std::sort(res.begin(), res.end(), show_cmp);
             return 1;
         }
 
@@ -170,7 +171,7 @@ class BookManager {
                 std::vector <Book> res;
                 res.resize(tot);
                 for (int i = 0; i < tot; i++) find_id(i + 1, res[i]);
-                sort(res.begin(), res.end(), show_cmp);
+                std::sort(res.begin(), res.end(), show_cmp);
                 for (int i = 0; i < tot; i++) std::cout << res[i] << '\n';
                 if (!tot) std::cout << '\n';
                 return ;
