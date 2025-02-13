@@ -112,7 +112,7 @@ int main() {
             }
             throw 0;
         }catch(int) {
-            std::cerr << "on text :" << cnt << std::endl;
+            // std::cerr << "on text :" << cnt << std::endl;
             std::cout << "Invalid\n";
         }
     }

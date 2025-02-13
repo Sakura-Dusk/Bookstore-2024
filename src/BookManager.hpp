@@ -358,6 +358,9 @@ class BookManager {
             if (now.select_book == -1) throw 0;
             Book now_book; find_id(now.select_book, now_book);
 
+            // bool check = 0;
+            // if (now_book.ISBN == Chars("978-1-261-59338-8")) check = 1;
+
             READ b = a;
             book_modify_check(b);
 
@@ -405,12 +408,14 @@ class BookManager {
                         if (last_keyword[i] == '|') {
                             std::string cut = last_keyword.substr(lstid, i - lstid);
                             Keyword_Store.data_delete(Chars(cut), now_book.BookID);
+                            // if (check) std::cerr << "check delete " << cut << std::endl;
                             lstid = i + 1;
                         }
                     }
-                    if (!len) {
+                    if (len) {
                         std::string cut = last_keyword.substr(lstid);
                         Keyword_Store.data_delete(Chars(cut), now_book.BookID);
+                        // if (check) std::cerr << "check delete " << cut << std::endl;
                     }
                     Book_Store.data_delete(now_book.BookID, now_book);
                     now_book.Keyword = Chars(word);
@@ -421,12 +426,14 @@ class BookManager {
                             std::string cut = word.substr(lstid, i - lstid);
                             Keyword_Store.data_insert(Chars(cut), now_book.BookID);
                             // std::cerr << "cut word = " << cut << std::endl;
+                            // if (check) std::cerr << "check add " << cut << std::endl;
                             lstid = i + 1;
                         }
                     }
                     std::string cut = word.substr(lstid);
                     // std::cerr << "cut word = " << cut << std::endl;
                     Keyword_Store.data_insert(Chars(cut), now_book.BookID);
+                    // if (check) std::cerr << "check add " << cut << std::endl;
                     continue;
                 }
                 if (op == "-price") {
