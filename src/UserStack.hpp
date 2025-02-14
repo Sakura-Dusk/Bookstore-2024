@@ -11,6 +11,7 @@
 class UserStack {
     private:
         std::vector <chars> Stack;
+        std::vector <int> select_book_Stack;
         UserStore Store;
         friend class UserStore;
         friend class BookManager;
@@ -23,6 +24,14 @@ class UserStack {
                 return User();
             }
             return *Store.List.data_find(Stack.back()).begin();
+        }
+
+        int get_select_book() {
+            if (Stack.empty()) {
+                // std::cerr << "no user" << std::endl;
+                return -1;
+            }
+            return select_book_Stack.back();
         }
 
         bool check_ID(string &now) {
@@ -62,6 +71,7 @@ class UserStack {
                 if (new_User.Privilege >= get_User().Privilege) throw 0;
                 Stack.push_back(new_User.UserID);
             }
+            select_book_Stack.push_back(-1);//一开始没选中图书
         }
 
         void Logout(READ &a) {
@@ -70,7 +80,7 @@ class UserStack {
             //取消当前选中的书
             User now = *Store.List.data_find(Stack.back()).begin();
             Store.List.data_delete(now.UserID, now);
-            now.select_book = -1;
+            select_book_Stack.pop_back();//取消选中
             Store.List.data_insert(now.UserID, now);
             Stack.pop_back();
         }

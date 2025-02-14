@@ -227,7 +227,7 @@ class BookManager {
             if (!check_ISBN(ISBN)) throw 0;
             if (a.length()) throw 0;
             User now = Stack.get_User();
-            int last_id = now.select_book;
+            int last_id = Stack.get_select_book();
             // std::cerr << now.UserID << std::endl;
             // if (last_id != -1 && Chars(ISBN) == (*Book_Store.data_find(last_id).begin()).ISBN) throw 0;
 
@@ -243,13 +243,13 @@ class BookManager {
                 nowbook.ISBN = Chars(ISBN);
                 Book_Store.data_insert(tot, nowbook);
                 ISBN_Store.data_insert(nowbook.ISBN, tot);
-                now.select_book = nowbook.BookID;
+                Stack.select_book_Stack.pop_back(); Stack.select_book_Stack.push_back(nowbook.BookID);
             }
             else {
-                now.select_book = tmp[0];
+                Stack.select_book_Stack.pop_back(); Stack.select_book_Stack.push_back(tmp[0]);
             }
             
-            // std::cerr << now.UserID << " " << now.select_book << "\n";
+            // std::cerr << now.UserID << " " << Stack.get_select_book() << "\n";
             Stack.Store.List.data_insert(now.UserID, now);
         }
 
@@ -291,8 +291,8 @@ class BookManager {
             if (a.length()) throw 0;
 
             User now = Stack.get_User();
-            if (now.select_book == -1) throw 0;
-            Book now_book; find_id(now.select_book, now_book);
+            if (Stack.get_select_book() == -1) throw 0;
+            Book now_book; find_id(Stack.get_select_book(), now_book);
 
             Book_Store.data_delete(now_book.BookID, now_book);
             now_book.Quantity += quantity;
@@ -308,7 +308,7 @@ class BookManager {
 
         void book_modify_check(READ &a) {
             User now = Stack.get_User();
-            Book now_book; find_id(now.select_book, now_book);
+            Book now_book; find_id(Stack.get_select_book(), now_book);
             bool fir[10];
             fir[0] = fir[1] = fir[2] = fir[3] = fir[4] = 0;
             while (a.length()) {
@@ -354,9 +354,9 @@ class BookManager {
             if (Stack.get_User().Privilege < 3) throw 0;
             // std::cerr << "User privilege fine\n";
             User now = Stack.get_User();
-            // std::cerr << now.select_book << std::endl;
-            if (now.select_book == -1) throw 0;
-            Book now_book; find_id(now.select_book, now_book);
+            // std::cerr << Stack.get_select_book() << std::endl;
+            if (Stack.get_select_book() == -1) throw 0;
+            Book now_book; find_id(Stack.get_select_book(), now_book);
 
             // bool check = 0;
             // if (now_book.ISBN == Chars("978-1-261-59338-8")) check = 1;

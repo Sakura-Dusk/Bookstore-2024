@@ -112,7 +112,8 @@ int main() {
             }
             throw 0;
         }catch(int) {
-            // std::cerr << "on text :" << cnt << std::endl;
+            // if (cnt >= 6512 && cnt <= 6568)
+            //     std::cerr << "on text :" << cnt << std::endl;
             std::cout << "Invalid\n";
         }
     }

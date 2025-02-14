@@ -6,7 +6,7 @@
 class User {
     private:
         chars UserID, Password, Username;
-        int Privilege, select_book = -1;
+        int Privilege;
         friend class UserStore;
         friend class UserStack;
         friend class BookManager;
